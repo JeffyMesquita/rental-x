@@ -1,0 +1,164 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "RentalX Documentation",
+    "description": "This is a API Rest",
+    "version": "1.0.0",
+    "contact": {
+      "name": "Jeferson Mesquita",
+      "email": "je_2742@hotmail.com",
+      "url": "https://github.com/jeffymesquita"
+    }
+  },
+  "paths": {
+    "/categories": {
+      "post": {
+        "tags": ["Category"],
+        "summary": "Create a category",
+        "description": "Create a new category",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string",
+                    "description": "The name of the category"
+                  },
+                  "description": {
+                    "type": "string",
+                    "description": "The description of the category"
+                  }
+                },
+                "example": {
+                  "name": "category name sample",
+                  "description": "Example description"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Category Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "statusCode": {
+                      "type": "number",
+                      "description": "statusCode returned",
+                      "example": 201
+                    },
+                    "result": {
+                      "type": "string",
+                      "description": "result returned",
+                      "example": "success"
+                    },
+                    "message": {
+                      "type": "string",
+                      "description": "message returned",
+                      "example": "successfully created category"
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "string",
+                          "description": "id returned",
+                          "example": "5efced68-b72f-41cb-9dae-0e3ac44533c9"
+                        },
+                        "name": {
+                          "type": "string",
+                          "description": "The name of the category",
+                          "example": "My Category"
+                        },
+                        "description": {
+                          "type": "string",
+                          "description": "The description of the category",
+                          "example": "My Description"
+                        },
+                        "created_at": {
+                          "type": "string",
+                          "description": "created_at returned",
+                          "example": "2016-04-28T11:33:21.679Z"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Category already exists"
+          }
+        }
+      },
+      "get": {
+        "tags": ["Category"],
+        "summary": "List all categories",
+        "description": "List all categories",
+        "responses": {
+          "200": {
+            "description": "success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "statusCode": {
+                      "type": "number",
+                      "description": "statusCode returned",
+                      "example": 200
+                    },
+                    "result": {
+                      "type": "string",
+                      "description": "result returned",
+                      "example": "success"
+                    },
+                    "message": {
+                      "type": "string",
+                      "description": "message returned",
+                      "example": "successfully in list all categories"
+                    },
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "string",
+                            "description": "id returned",
+                            "example": "5efced68-b72f-41cb-9dae-0e3ac44533c9"
+                          },
+                          "name": {
+                            "type": "string",
+                            "description": "The name of the category",
+                            "example": "My Category"
+                          },
+                          "description": {
+                            "type": "string",
+                            "description": "The description of the category",
+                            "example": "My Description"
+                          },
+                          "created_at": {
+                            "type": "string",
+                            "description": "created_at returned",
+                            "example": "2016-04-28T11:33:21.679Z"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
