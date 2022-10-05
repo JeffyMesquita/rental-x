@@ -1,7 +1,7 @@
 {
   "openapi": "3.0.0",
   "info": {
-    "title": "RentalX Documentation",
+    "title": "Rentx Documentation",
     "description": "This is a API Rest",
     "version": "1.0.0",
     "contact": {
@@ -158,6 +158,98 @@
             }
           }
         }
+      }
+    },
+    "/specifications": {
+      "post": {
+        "tags": ["Specification"],
+        "summary": "Create a specification",
+        "description": "Create a new specification",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/definitions/Specification"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Specification Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "statusCode": {
+                      "type": "number",
+                      "description": "statusCode returned",
+                      "example": 201
+                    },
+                    "result": {
+                      "type": "string",
+                      "description": "result returned",
+                      "example": "success"
+                    },
+                    "message": {
+                      "type": "string",
+                      "description": "message returned",
+                      "example": "successfully created specification"
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "string",
+                          "description": "id returned",
+                          "example": "5efced68-b72f-41cb-9dae-0e3ac44533c9"
+                        },
+                        "name": {
+                          "type": "string",
+                          "description": "The name of the specification",
+                          "example": "My Specification"
+                        },
+                        "description": {
+                          "type": "string",
+                          "description": "The description of the specification",
+                          "example": "My Specification description"
+                        },
+                        "created_at": {
+                          "type": "string",
+                          "description": "created_at returned",
+                          "example": "2016-04-28T11:33:21.679Z"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Specification already exists"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Specification": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the specification"
+        },
+        "description": {
+          "type": "string",
+          "description": "The description of the specification"
+        }
+      },
+      "example": {
+        "name": "specification name sample",
+        "description": "Example description"
       }
     }
   }

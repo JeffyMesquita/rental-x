@@ -1,22 +1,31 @@
-import { Specification } from "../../model/Specification";
-import { ISpecificationsRepository } from "../../repositories/ISpecificationRepository";
+import { inject, injectable } from 'tsyringe';
+import { Specification } from '../../entities/Specification';
+import { ISpecificationsRepository } from '../../repositories/ISpecificationRepository';
 
 interface IRequest {
   name: string;
   description: string;
 }
 
+@injectable()
 class CreateSpecificationUseCase {
-  constructor(private specificationRepository: ISpecificationsRepository) {}
+  constructor(
+    @inject('SpecificationsRepository')
+    private specificationRepository: ISpecificationsRepository
+  ) {}
 
-  execute({ name, description }: IRequest): Specification | Error {
-    const specificationAlreadyExists = this.specificationRepository.findByName(name);
+  async execute({ name, description }: IRequest): Promise<Specification> {
+    const specificationAlreadyExists =
+      await this.specificationRepository.findByName(name);
 
     if (specificationAlreadyExists) {
       throw new Error(`Specification ${name} already exists`);
     }
 
-    const specification = this.specificationRepository.create({ name, description });
+    const specification = await this.specificationRepository.create({
+      name,
+      description,
+    });
 
     return specification;
   }
