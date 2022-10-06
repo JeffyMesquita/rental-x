@@ -160,6 +160,33 @@
         }
       }
     },
+    "categories/import": {
+      "post": {
+        "tags": ["categories"],
+        "summary": "Upload a new a category",
+        "description": "Upload a new a category",
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "file": {
+                    "type": "string",
+                    "format": "binary"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "response": {
+          "201": {
+            "description": "Created"
+          }
+        }
+      }
+    },
     "/specifications": {
       "post": {
         "tags": ["Specification"],

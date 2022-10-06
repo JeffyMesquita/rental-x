@@ -10,5 +10,6 @@ getConnectionOptions().then((options) => {
   createConnection({
     ...options,
     synchronize: true,
+    migrationsRun: true,
   });
 });
