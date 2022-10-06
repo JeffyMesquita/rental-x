@@ -3,6 +3,7 @@ import { compare } from 'bcryptjs';
 import { sign } from 'jsonwebtoken';
 
 import { IUsersRepository } from '../../repositories/IUsersRepository';
+import { AppError } from '../../../../errors/AppError';
 
 interface IRequest {
   email: string;
@@ -13,7 +14,8 @@ interface IResponse {
   user: {
     name: string;
     email: string;
-  }
+    isAdmin: boolean;
+  };
   token: string;
 }
 
@@ -29,14 +31,14 @@ class AuthenticateUserUseCase {
     const user = await this.usersRepository.findByEmail(email);
 
     if (!user) {
-      throw new Error('Email or password incorrect');
+      throw new AppError('Email or password incorrect');
     }
     // Senha está correta?
 
     const passwordMatch = compare(password, user.password);
 
     if (!passwordMatch) {
-      throw new Error('Email or password incorrect');
+      throw new AppError('Email or password incorrect');
     }
 
     // Gerar jsonwebtoken
@@ -45,7 +47,16 @@ class AuthenticateUserUseCase {
       expiresIn: '1d',
     });
 
-    return { user, token };
+    const tokenReturn: IResponse = {
+      user: {
+        name: user.name,
+        email: user.email,
+        isAdmin: user.isAdmin,
+      },
+      token,
+    };
+
+    return tokenReturn;
   }
 }
 
