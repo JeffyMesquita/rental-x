@@ -18,7 +18,7 @@ class User {
   @Column()
   driver_license: string;
 
-  @Column()
+  @Column({ nullable: true})
   avatar: string;
 
   @Column()
