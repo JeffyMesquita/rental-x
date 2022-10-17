@@ -4,5 +4,8 @@
     "originalname",
     "tsyringe",
     "typeorm"
+  ],
+  "cSpell.words": [
+    "middlewares"
   ]
 }
