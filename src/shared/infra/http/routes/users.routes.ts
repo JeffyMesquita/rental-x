@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { ensuredAuthenticated } from '@middlewares/ensureAuthenticated';
+import { ensuredAuthenticated } from '@shared/infra/http/middlewares/ensureAuthenticated';
 import multer from 'multer';
 
 import { CreateUserController } from '@modules/accounts/useCases/createUser/CreateUserController';
