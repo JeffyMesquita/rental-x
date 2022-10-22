@@ -9,12 +9,12 @@ interface IRequest {
   specifications_id: string[];
 }
 
-// @injectable()
+@injectable()
 export class CreateCarSpecificationUseCase {
   constructor(
-    // @inject('CarsRepository')
+    @inject('CarsRepository')
     private carsRepository: ICarsRepository,
-
+    @inject('SpecificationsRepository')
     private specificationsRepository: ISpecificationsRepository
   ) {}
 
@@ -28,8 +28,6 @@ export class CreateCarSpecificationUseCase {
     const specifications = await this.specificationsRepository.findByIds(
       specifications_id
     );
-
-    console.log(specifications);
 
     carsExists.specifications = specifications;
 
