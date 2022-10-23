@@ -16,8 +16,6 @@ export class CreateCarSpecificationController {
         specifications_id
       });
 
-      console.log(cars);
-
       return response.status(200).json(cars);
     };
 };
