@@ -2,16 +2,22 @@ import dayjs from 'dayjs';
 import { AppError } from '@shared/errors/AppError';
 import { RentalsRepositoryInMemory } from './../../repositories/inMemory/RentalsRepositoryInMemory';
 import { CreateRentalUseCase } from './CreateRentalUseCase';
+import { DayJsDateProvider } from '@shared/container/providers/DateProvider/implementations/DayJsDateProvider';
 
 let createRentalUseCase: CreateRentalUseCase;
 let rentalsRepositoryInMemory: RentalsRepositoryInMemory;
+let dayJsDateProvider: DayJsDateProvider;
 
 describe('Create Rental', () => {
   const dayAdd24Hours = dayjs().add(1, 'day').toDate();
 
   beforeEach(() => {
     rentalsRepositoryInMemory = new RentalsRepositoryInMemory();
-    createRentalUseCase = new CreateRentalUseCase(rentalsRepositoryInMemory);
+    dayJsDateProvider = new DayJsDateProvider();
+    createRentalUseCase = new CreateRentalUseCase(
+      rentalsRepositoryInMemory,
+      dayJsDateProvider
+    );
   });
 
   it('should be able to create a new rental ', async () => {
@@ -64,8 +70,6 @@ describe('Create Rental', () => {
         car_id: '21690',
         expected_return_date: dayjs().toDate(),
       });
-
-      
     }).rejects.toBeInstanceOf(AppError);
   });
 });
