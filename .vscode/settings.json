@@ -3,6 +3,7 @@
     "dayjs",
     "dtos",
     "originalname",
+    "rentx",
     "tsyringe",
     "typeorm"
   ],
