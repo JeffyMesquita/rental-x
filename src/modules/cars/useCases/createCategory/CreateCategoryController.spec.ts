@@ -22,6 +22,11 @@ describe('Create Category Controller', () => {
     );
   });
 
+  afterAll(async () => {
+    await connection.dropDatabase();
+    await connection.close();
+  });
+
   it('should be able to create a new category', async () => {
     const responseToken = await request(app).post('/sessions').send({
       email: 'admin@rentx.com.br',
@@ -41,10 +46,26 @@ describe('Create Category Controller', () => {
       });
 
     expect(response.status).toBe(201);
-  });
+  });  
 
-  afterAll(async () => {
-    await connection.dropDatabase();
-    await connection.close();
-  });
+  it('should be not able to create a new category', async () => {
+    const responseToken = await request(app).post('/sessions').send({
+      email: 'admin@rentx.com.br',
+      password: 'admin',
+    });
+
+    const { token } = responseToken.body.data;
+
+    const response = await request(app)
+      .post('/categories')
+      .send({
+        name: 'Category Supertest',
+        description: 'Supertest description',
+      })
+      .set({
+        Authorization: `Bearer ${token}`,
+      });
+
+    expect(response.status).toBe(400);
+  });  
 });
