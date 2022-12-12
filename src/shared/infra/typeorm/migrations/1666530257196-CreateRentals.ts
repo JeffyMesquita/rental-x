@@ -22,6 +22,7 @@ export class CreateRentals1666530257196 implements MigrationInterface {
           {
             name: 'start_date',
             type: 'timestamp',
+            default: 'now()',
           },
           {
             name: 'end_date',
